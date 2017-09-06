@@ -9,5 +9,13 @@
  */
 class Ball
 {
-	//you code here - variables, required methods, etc.
+     public Ball (int number) {
+	this.number = number;     
+     }
+     public String toString() {
+	return  "(%d)", this.number;     
+     }
+     public int getNumber() {
+	return this.number;     
+     }
 }
