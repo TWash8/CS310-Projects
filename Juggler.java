@@ -1,5 +1,5 @@
 /**
- * @author Your Name Here
+ * @author Thomas Washington
  * CS310
  * Fall 2017
  */
@@ -15,7 +15,35 @@ class Juggler
 	 */
 	private class Hand
 	{
-		//you code here - variables, required methods, etc.
+	     List<Ball> hold;
+		
+	     public void catchBall (Ball ball) {
+		if (hold.size() > 0) {
+		     throw (new RuntimeException);	
+		}
+		 hold.add(ball);
+	     }
+		
+	     public Ball throwBall() {
+		if (hold.size() == 0) {
+		     throw (new RuntimeException);	
+		}
+		return hold.remove(0);
+	     }
+		
+	     public boolean hasBall() {
+	          if (hold.size() > 0) {
+			return true;	  
+		  }
+		     return false;
+	     }
+		
+	     public String toString() {
+		if (hasBall(hold)) {
+			return "   ";	
+		}
+		     return hold.toString();
+	     }
 	}
 	
 	/*-------------- DO NOT CHANGE ANYTHING BELOW THIS LINE --------------*/
