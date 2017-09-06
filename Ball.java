@@ -1,5 +1,5 @@
 /**
- * @author Your Name Here
+ * @author Thomas Washington
  * CS310
  * Fall 2017
  */
