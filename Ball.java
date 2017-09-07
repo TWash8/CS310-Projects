@@ -9,13 +9,15 @@
  */
 class Ball
 {
-     public Ball (int number) {
-	this.number = number;     
-     }
-     public String toString() {
-	return  "(%d)", this.number;     
-     }
-     public int getNumber() {
-	return this.number;     
-     }
+  private int number = 0;
+  
+  public Ball (int number) {
+    this.number = number;     
+  }
+  public String toString() {
+    return  ("(" + this.number + ")");     
+  }
+  public int getNumber() {
+    return this.number;     
+  }
 }
