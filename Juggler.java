@@ -17,14 +17,14 @@ class Juggler
   {
     Ball[] hold = new Ball[1];
     
-    public void catchBall (Ball ball) {
+    private void catchBall (Ball ball) {
       if (hold[0] == null) {
         throw new RuntimeException("no"); 
       }
       hold[0] = ball;
     }
     
-    public Ball throwBall() {
+    private Ball throwBall() {
       if (hold[0] == null) {
         throw new RuntimeException("no"); 
       }
@@ -33,14 +33,14 @@ class Juggler
       return now;
     }
     
-    public boolean hasBall() {
+    private boolean hasBall() {
       if (hold[0] != null) {
         return true;   
       }
       return false;
     }
     
-    public String toString() {
+    private String toString() {
       if (!hasBall()) {
         return "   "; 
       }
