@@ -20,32 +20,53 @@ class Air<T> implements Queue<T>
 	 * Allowing room for growth...
 	 */
 	public static final int MAX_CAPACITY = 15;
-
+	     public boolean add(T item){}
+	     public boolean offer(T item) {}
+             public T remove(){}
+	     public T poll(){}
+	     public T element()
+	     public T peek(){}
+	     public String toString() {}
+	     public void clear() {}
+	     public boolean isEmpty() {}
+	     public int size() {}
+	     public Object[] toArray() {}
 	/**
 	 * 
 	 */
 	private class ListItem<T>
 	{
 		private ListItem<T> next;
-		private int size;
-		private int number;
+		private int num;
 		
-		public ListItem<T> () {
-		     size = 0;
+		private ListItem<T> () {
+		     num = 0;
 		     next = null;
 		}
 		
-		public ListItem<T> (int number) {
+		private ListItem<T> (int num, ListItem<T> next) {
 		     this.number = number;
-		     this.size++;
+		     this.next = next;
 		}
 		
-		public int getSize() {
+		private int getSize() {
 		     return this.size;
 		}
 		
-		public int getNumber(int number) {
-		     
+		private int getNumber(int num) {
+		     return this.num;
+		}
+		
+		private void setItem (ListItem<T> next) {
+		     this.next = next;
+		}
+		
+		private void setNumber (int num) {
+		     this.num = num;
+		}
+		
+		private String toString() {
+		     return num + "";
 		}
 		
 	}
