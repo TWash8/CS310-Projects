@@ -74,9 +74,11 @@ class Air<T> implements Queue<T>
   private class ListItem<T>
   {
     private int num;
+    private ListItem<T> next
     
     private ListItem () {
       num = 0;
+      next = null;
     }
     
     private ListItem (int num) {
@@ -84,12 +86,8 @@ class Air<T> implements Queue<T>
     }
     
     
-    private int getNumber(int num) {
-      return this.num;
-    }
-    
-    private void setNumber (int num) {
-      this.num = num;
+    private String toString() {
+    	return this.num + "";
     }
     
     
