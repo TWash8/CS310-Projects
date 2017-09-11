@@ -20,10 +20,12 @@ class Air<T> implements Queue<T>
    * Allowing room for growth...
    */
   public static final int MAX_CAPACITY = 15;
-  private ListItem first;
+  private ListItem head, tail;
+  private int size;
   
   private Air () {
-  	first = null;
+  	first = head = null;
+    size = 0;
   }
   
   public boolean add(T item){
@@ -60,11 +62,11 @@ class Air<T> implements Queue<T>
   private class ListItem<T>
   {
     private int num;
-    private ListItem<T> next
+    private ListItem<T> next;
     
-    private ListItem () {
+    private ListItem (T item) {
       num = 0;
-      next = null;
+      next = item;
     }
     
     private ListItem (int num) {
