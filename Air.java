@@ -20,36 +20,22 @@ class Air<T> implements Queue<T>
    * Allowing room for growth...
    */
   public static final int MAX_CAPACITY = 15;
-  LinkedList<T> air = new LinkedList<T>();
+  private ListItem first;
+  
+  private Air () {
+  	first = null;
+  }
   
   public boolean add(T item){
-    if (air.size() > MAX_CAPACITY) {
-      throw new IllegalStateException();
-    }
-    if (item == null) {
-      throw new NullPointerException();
-    }
-    air.add(item);
-    air.size++;
-    return true;
+    
   }
   
   public boolean offer(T item) {
-    if (item == null) {
-         throw new NullPointer Exception();
-    }
-    if (air.size() < MAX_CAPACITY) {
-    	air.add(item);
-	air.size++;
-         return true;
-    }
+    
   }
   
   public T remove(){
-       if (air.size() == 0) {
-       	throw new NoSuchElementException;
-       }
-       return air.remove(0);
+       
   }
   
   public T poll(){}
