@@ -20,31 +20,62 @@ class Air<T> implements Queue<T>
    * Allowing room for growth...
    */
   public static final int MAX_CAPACITY = 15;
-  private ListItem head, tail;
-  private int size;
+  private ListItem<T> head, tail;
+  private int size = 0;
   
-  private Air () {
-  	first = head = null;
-    size = 0;
+  private Air (T item) {
+    head = tail = new ListItem<T>(item);
   }
   
   public boolean add(T item){
-    
+    if ((size + 1) > MAX_CAPACITY) {
+      throw new IllegalStateException();
+    }
+    if (item == null) {
+     throw new NullPointerException(); 
+    }
+    ListItem<T> n = new ListItem<T>(item);
+    if (head == null) {
+     head = tail = n;
+     n.next = null;
+    }
+    else {
+      tail.next = n;
+      tail = n;
+      n.next = null;
+    }
+    size ++;
+    return true;
   }
   
   public boolean offer(T item) {
-    
+    return add(item);
   }
   
   public T remove(){
-       
+    if (size == 0) {
+     throw new NoSuchElementException(); 
+    }
+    ListItem<T> now = head;
+    head = head.next;
+    size --;
+    return now.item;
   }
   
-  public T poll(){}
+  public T poll(){
+    return remove();
+  }
   
-  public T element() {}
+  public T element() {
+    if (size == 0) {
+     throw new NoSuchElementException(); 
+    }
+    return head.item;
+  }
   
-  public T peek(){}
+  public T peek(){
+    return element();
+  }
   
   public String toString() {}
   
@@ -61,21 +92,16 @@ class Air<T> implements Queue<T>
    */
   private class ListItem<T>
   {
-    private int num;
     private ListItem<T> next;
+    private T item;
     
     private ListItem (T item) {
-      num = 0;
-      next = item;
+      this.item = item;
+      next = null;
     }
     
-    private ListItem (int num) {
-      this.num = num;
-    }
-    
-    
-    private String toString() {
-    	return this.num + "";
+    private ListItem () {
+      next = null;
     }
     
     
