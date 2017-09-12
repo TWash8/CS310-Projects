@@ -77,16 +77,48 @@ class Air<T> implements Queue<T>
     return element();
   }
   
-  public String toString() {}
+  public String toString() {
+    ListItem<T> now = head;
+    String result = "";
+    while (now.getNext() != null) {
+      result += now.toString() + "";
+      now = now.getNext();
+      }
+    return result;
+  }
   
-  public void clear() {}
+  public void clear() {
+    ListItem<T> now = head;
+    while (now.getNext() != null) {
+      now = null;
+      now.item = null;
+      now = now.next;
+    }
+    size = 0;
+  }
   
-  public boolean isEmpty() {}
+  public boolean isEmpty() {
+    if (head == null) {
+      return true;
+    }
+    return false;
+  }
   
   public int size() {
-    return air.size();
+    return size;
   }
-  public Object[] toArray() {}
+  public Object[] toArray() {
+    ListItem[] result = new ListItem[MAX_CAPACITY];
+    ListItem<T> now = head;
+    int index = 0;
+    
+    while (now.getNext() != null) {
+      result[index] = now;
+      now = now.getNext();
+      index++;
+    }
+    return result;
+  }
   /**
    * 
    */
@@ -99,9 +131,12 @@ class Air<T> implements Queue<T>
       this.item = item;
       next = null;
     }
+    private ListItem<T> getNext() {
+      return this.next;
+    }
     
-    private ListItem () {
-      next = null;
+    public String toString() {
+      return item.toString() + "";
     }
     
     
