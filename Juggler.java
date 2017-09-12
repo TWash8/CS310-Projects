@@ -15,32 +15,32 @@ class Juggler
    */
   private class Hand
   {
-    Ball[] hold = new Ball[1];
+    Ball hold = null;
     
-    private void catchBall (Ball ball) {
-      if (hold[0] == null) {
-        throw new RuntimeException("no"); 
+    public void catchBall (Ball ball) {
+      if (hold == null) {
+        throw new RuntimeException(); 
       }
-      hold[0] = ball;
+      hold = ball;
     }
     
-    private Ball throwBall() {
-      if (hold[0] == null) {
-        throw new RuntimeException("no"); 
+    public Ball throwBall() {
+      if (hold == null) {
+        throw new RuntimeException(); 
       }
-      Ball now = new Ball(hold[0].getNumber());
-      hold [0] = null;
+      Ball now = hold;
+      hold = null;
       return now;
     }
     
-    private boolean hasBall() {
-      if (hold[0] != null) {
+    public boolean hasBall() {
+      if (hold != null) {
         return true;   
       }
       return false;
     }
     
-    private String toString() {
+    public String toString() {
       if (!hasBall()) {
         return "   "; 
       }
