@@ -23,6 +23,10 @@ class Air<T> implements Queue<T>
   private ListItem<T> head, tail;
   private int size = 0;
   
+  private Air () {
+    head = tail = new ListItem<T>;
+  }
+  
   private Air (T item) {
     head = tail = new ListItem<T>(item);
   }
