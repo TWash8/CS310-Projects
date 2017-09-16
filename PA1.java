@@ -26,16 +26,16 @@ class PA1
   int i = PA1.doMenu(sc);
   
   while (i != 4) {
+    //Throws ball into air; resets if not enough balls to throw
     if (i == 1) {
       try {
         stephen.throwBall();
       }
-      catch (RuntimeException e) {
-        System.out.println("Not enough balls");
-        stephen.air.clear();
-        stephen.numUnthrownBalls = stephen.totalBalls;
-        System.out.println("Stephen drops everything");
-        System.out.println("Stephen wants to try again");
+      catch (Exception e) {
+        System.out.println("Not enough balls!");
+        stephen = new Juggler();
+        System.out.println("Stephen drops everything.");
+        System.out.println("Stephen wants to try again.");
         System.out.println("He has " + stephen.getNumUnthrownBalls() + " balls");
       }
     }
@@ -49,7 +49,16 @@ class PA1
     }
     
     else if (i == 3) {
-      stephen.catchBall();
+      try {
+        stephen.catchBall();
+      }
+      catch (Exception e) {
+        System.out.println("Too many balls!");
+        stephen = new Juggler();
+        System.out.println("Stephen drops everything.");
+        System.out.println("Stephen wants to try again.");
+        System.out.println("He has " + stephen.getNumUnthrownBalls() + " balls");
+      }
     }
     else if (i == 4) {
       break;
