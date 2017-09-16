@@ -18,7 +18,7 @@ class Juggler
     Ball hold = null;
     
     public void catchBall (Ball ball) {
-      if (hold == null) {
+      if (hold != null) {
         throw new RuntimeException(); 
       }
       hold = ball;
@@ -93,7 +93,7 @@ class Juggler
    */
   public void throwBall()
   {
-    if(!hands[0].hasBall() && this.numUnthrownBalls > 0)
+    if(!hands[0].hasBall() && this.numUnthrownBalls > 0) 
       air.add(new Ball(this.numUnthrownBalls--));
     else
       air.add(hands[0].throwBall());
