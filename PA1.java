@@ -27,19 +27,35 @@ class PA1
   
   while (i != 4) {
     if (i == 1) {
-      
+      try {
+        stephen.throwBall();
+      }
+      catch (RuntimeException e) {
+        System.out.println("Not enough balls");
+        stephen.air.clear();
+        stephen.numUnthrownBalls = stephen.totalBalls;
+        System.out.println("Stephen drops everything");
+        System.out.println("Stephen wants to try again");
+        System.out.println("He has " + stephen.getNumUnthrownBalls() + " balls");
+      }
     }
     else if (i == 2) {
-      
+      try {
+        stephen.passBall();
+      }
+      catch (NullPointerException e) {
+        System.out.println(""); 
+      }
     }
+    
     else if (i == 3) {
-      
+      stephen.catchBall();
     }
     else if (i == 4) {
-     break;
+      break;
     }
     else {
-     System.out.println("Invalid selection!"); 
+      System.out.println("Invalid selection!"); 
     }
     System.out.println(stephen.toString());
     i = PA1.doMenu(sc);
@@ -56,14 +72,14 @@ class PA1
   */
  public static int doMenu(Scanner in)
  {
-  System.out.println("\nStephen can:");
-  System.out.println("1) Throw a ball into the air");
-  System.out.println("2) Pass a ball between hands");
-  System.out.println("3) Catch a ball from the air");
-  System.out.println("4) Quit");
-  System.out.print("\nWhat should he do? ");
-  
-  int j = in.nextInt();
-  return j;
+   System.out.println("\nStephen can:");
+   System.out.println("1) Throw a ball into the air");
+   System.out.println("2) Pass a ball between hands");
+   System.out.println("3) Catch a ball from the air");
+   System.out.println("4) Quit");
+   System.out.print("\nWhat should he do? ");
+   
+   int j = in.nextInt();
+   return j;
  }
 }
