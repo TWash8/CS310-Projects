@@ -23,11 +23,11 @@ class Air<T> implements Queue<T>
   private ListItem<T> head, tail;
   private int size = 0;
   
-  private Air () {
-    head = tail = new ListItem<T>;
+  public Air () {
+    head = tail = new ListItem<T>();
   }
   
-  private Air (T item) {
+  public Air (T item) {
     head = tail = new ListItem<T>(item);
   }
   
@@ -39,15 +39,20 @@ class Air<T> implements Queue<T>
      throw new NullPointerException(); 
     }
     ListItem<T> n = new ListItem<T>(item);
-    if (head == null) {
+   
+    if (head.getItem() == null) {
      head = tail = n;
-     n.next = null;
+     size ++;
+     return true;
     }
-    else {
-      tail.next = n;
-      tail = n;
-      n.next = null;
+    
+    ListItem<T> hold = head;
+    while (hold.next != null) {
+     hold = hold.next; 
     }
+    
+    hold.setNext(n);
+    tail = hold.next;
     size ++;
     return true;
   }
@@ -58,12 +63,9 @@ class Air<T> implements Queue<T>
   
   public T remove(){
     if (size == 0) {
-     throw new NoSuchElementException(); 
+      throw new NoSuchElementException(); 
     }
-    ListItem<T> now = head;
-    head = head.next;
-    size --;
-    return now.item;
+    return tail.getItem();
   }
   
   public T poll(){
@@ -84,8 +86,12 @@ class Air<T> implements Queue<T>
   public String toString() {
     ListItem<T> now = head;
     String result = "";
+    if(now.item != null) {
+      result += now.toString();
+    }
+    
     while (now.getNext() != null) {
-      result += now.toString() + "";
+      result += now.toString();
       now = now.getNext();
       }
     return result;
@@ -131,16 +137,29 @@ class Air<T> implements Queue<T>
     private ListItem<T> next;
     private T item;
     
-    private ListItem (T item) {
+    public ListItem() {
+     next = null;
+     item = null;
+    }
+    public ListItem (T item) {
       this.item = item;
       next = null;
     }
-    private ListItem<T> getNext() {
+    public ListItem<T> getNext() {
       return this.next;
     }
     
+    public void setNext(ListItem<T> next) {
+     this.next = next;
+     next.next = null;
+    }
+    
+    public T getItem() {
+      return this.item;
+    }
+    
     public String toString() {
-      return item.toString() + "";
+      return this.item.toString();
     }
     
     
