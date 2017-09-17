@@ -39,20 +39,16 @@ class Air<T> implements Queue<T>
      throw new NullPointerException(); 
     }
     ListItem<T> n = new ListItem<T>(item);
-   
-    if (head.getItem() == null) {
+    //If the head does not have a value, give it and the tail the same new ListItem.
+    if (head.getItem() == null) { 
      head = tail = n;
      size ++;
      return true;
     }
-    
-    ListItem<T> hold = head;
-    while (hold.next != null) {
-     hold = hold.next; 
-    }
-    
-    hold.setNext(n);
-    tail = hold.next;
+    //If the head already has a value, put the value in the previous spot before head and make it the new head.
+    n.next = head;
+    head.setPrev(n);
+    head = n;    
     size ++;
     return true;
   }
@@ -65,7 +61,11 @@ class Air<T> implements Queue<T>
     if (size == 0) {
       throw new NoSuchElementException(); 
     }
-    return tail.getItem();
+    ListItem<T> hold = tail;
+    tail.prev = tail;
+    tail = tail.prev;
+    size --;
+    return hold.getItem();
   }
   
   public T poll(){
@@ -87,11 +87,11 @@ class Air<T> implements Queue<T>
     ListItem<T> now = head;
     String result = "";
     if(now.item != null) {
-      result += now.toString();
+      result += now.toString() + "";
     }
     
     while (now.getNext() != null) {
-      result += now.toString();
+      result += now.toString() + "";
       now = now.getNext();
       }
     return result;
@@ -101,6 +101,7 @@ class Air<T> implements Queue<T>
     ListItem<T> now = head;
     while (now.getNext() != null) {
       now = null;
+      now.prev = null;
       now.item = null;
       now = now.next;
     }
@@ -134,16 +135,16 @@ class Air<T> implements Queue<T>
    */
   private class ListItem<T>
   {
-    private ListItem<T> next;
+    private ListItem<T> next, prev;
     private T item;
     
     public ListItem() {
-     next = null;
+     next = prev = null;
      item = null;
     }
     public ListItem (T item) {
       this.item = item;
-      next = null;
+      next = prev = null;
     }
     public ListItem<T> getNext() {
       return this.next;
@@ -151,7 +152,10 @@ class Air<T> implements Queue<T>
     
     public void setNext(ListItem<T> next) {
      this.next = next;
-     next.next = null;
+    }
+    
+    public void setPrev(ListItem<T> prev) {
+     this.prev = prev; 
     }
     
     public T getItem() {
