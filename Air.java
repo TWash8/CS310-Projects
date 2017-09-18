@@ -26,11 +26,7 @@ class Air<T> implements Queue<T>
   public Air () {
     head = tail = new ListItem<T>();
   }
-  
-  public Air (T item) {
-    head = tail = new ListItem<T>(item);
-  }
-  
+
   public boolean add(T item){
     if ((size + 1) > MAX_CAPACITY) {
       throw new IllegalStateException();
@@ -46,9 +42,13 @@ class Air<T> implements Queue<T>
      return true;
     }
     //If the head already has a value, put the value in the previous spot before head and make it the new head.
+    //n.next = head;
+  //  head.setPrev(n);
+   // head = n;
+    n.prev = head.prev;
+    head.prev.next = n;
     n.next = head;
-    head.setPrev(n);
-    head = n;    
+    head.prev = n;
     size ++;
     return true;
   }
