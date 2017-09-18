@@ -42,13 +42,9 @@ class Air<T> implements Queue<T>
      return true;
     }
     //If the head already has a value, put the value in the previous spot before head and make it the new head.
-    //n.next = head;
-  //  head.setPrev(n);
-   // head = n;
-    n.prev = head.prev;
-    head.prev.next = n;
     n.next = head;
-    head.prev = n;
+    head.setPrev(n);
+    head = n;
     size ++;
     return true;
   }
