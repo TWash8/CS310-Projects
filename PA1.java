@@ -43,8 +43,12 @@ class PA1
       try {
         stephen.passBall();
       }
-      catch (NullPointerException e) {
-        System.out.println(""); 
+      catch (Exception e) {
+        System.out.println("Too many balls!"); 
+        stephen = new Juggler();
+        System.out.println("Stephen drops everything.");
+        System.out.println("Stephen wants to try again.");
+        System.out.println("He has " + stephen.getNumUnthrownBalls() + " balls");
       }
     }
     
