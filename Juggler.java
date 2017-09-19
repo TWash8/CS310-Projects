@@ -14,7 +14,9 @@ class Juggler
    * 
    */
   private class Hand
-  {
+  {/**
+   *catchBall(Ball ball): Adds ball to hand. 
+   */
     Ball hold = null;
     
     public void catchBall (Ball ball) {
