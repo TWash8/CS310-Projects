@@ -13,6 +13,12 @@ class PA1
 {
  /**
   * @param
+  * 
+  * Main method.
+  * First prints out the juggler and the menu.
+  * Waits for integer input.
+  * Depending on input, the juggler will throw a ball, catch a ball, pass a ball between hands, or quit the program.
+  * While loop can keep taking in input and modifying ball placement.
   */
  public static void main(String[] args)
  {
@@ -26,7 +32,6 @@ class PA1
   int i = PA1.doMenu(sc);
   
   while (i != 4) {
-    //Throws ball into air; resets if not enough balls to throw
     if (i == 1) {
       try {
         stephen.throwBall();
@@ -57,7 +62,7 @@ class PA1
         stephen.catchBall();
       }
       catch (Exception e) {
-        System.out.println("Too many balls!");
+        System.out.println("Not enough balls!");
         stephen = new Juggler();
         System.out.println("Stephen drops everything.");
         System.out.println("Stephen wants to try again.");
@@ -71,6 +76,7 @@ class PA1
       System.out.println("Invalid selection!"); 
     }
     System.out.println(stephen.toString());
+    
     i = PA1.doMenu(sc);
   }
   
@@ -81,7 +87,9 @@ class PA1
  
  /**
   * @param
-  * @return 
+  * @return
+  * Prints out a selection menu and waits for user input.
+  * If the input is the wrong type, acknowledge that and retry.
   */
  public static int doMenu(Scanner in)
  {
@@ -92,7 +100,17 @@ class PA1
    System.out.println("4) Quit");
    System.out.print("\nWhat should he do? ");
    
-   int j = in.nextInt();
+   int j = 0;
+   
+   try {
+     j = in.nextInt();
+   }
+   catch (InputMismatchException e) {
+     System.out.println("Invalid selection");
+     Scanner sc = new Scanner(System.in);
+     j= PA1.doMenu(sc);
+   }
+   
    return j;
  }
 }
