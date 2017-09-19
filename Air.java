@@ -23,76 +23,106 @@ class Air<T> implements Queue<T>
   private ListItem<T> head, tail;
   private int size = 0;
   
+  /**
+   * Default constructor.
+   */
   public Air () {
     head = tail = new ListItem<T>();
   }
-
+  /**
+   * Add method.
+   * Throw exceptions if the item does not exist or the size goes beyond capacity.
+   * If the head does not have a value, give it and the tail the same new ListItem.
+   * If the head already has a value, put the value in the previous spot before head and make it the new head.
+   */
   public boolean add(T item){
     if ((size + 1) > MAX_CAPACITY) {
       throw new IllegalStateException();
     }
+    
     if (item == null) {
      throw new NullPointerException(); 
     }
+    
     ListItem<T> n = new ListItem<T>(item);
-    //If the head does not have a value, give it and the tail the same new ListItem.
+
     if (head.getItem() == null) { 
      head = tail = n;
      size ++;
      return true;
     }
-    //If the head already has a value, put the value in the previous spot before head and make it the new head.
+
     n.next = head;
-    head.setPrev(n);
+    head.prev = n;
     head = n;
     size ++;
     return true;
   }
-  
+  /*
+   * Offer method: same as add.
+   */
   public boolean offer(T item) {
     return add(item);
   }
-  
+  /*
+   * 
+   */
   public T remove(){
     if (size == 0) {
       throw new NoSuchElementException(); 
     }
     ListItem<T> hold = tail;
-    tail.prev = tail;
+    //If there is only one ball in the air, remove it and shrink the list.
+    if (tail != null && tail == head) {
+      tail = head = new ListItem<T>();
+      size --;
+      return hold.getItem();
+    }
+    //Otherwise, make the new tail equal to tail
     tail = tail.prev;
+    tail.next = null;
     size --;
     return hold.getItem();
   }
-  
+  /*
+   * 
+   */
   public T poll(){
     return remove();
   }
-  
+  /*
+   * 
+   */
   public T element() {
     if (size == 0) {
      throw new NoSuchElementException(); 
     }
     return head.item;
   }
-  
+  /*
+   * 
+   */
   public T peek(){
     return element();
   }
-  
+  /*
+   * 
+   */
   public String toString() {
     ListItem<T> now = head;
     String result = "";
     if(now.item != null) {
       result += now.toString() + "";
     }
-    
     while (now.getNext() != null) {
-      result += now.toString() + "";
       now = now.getNext();
+      result += now.toString() + "";
       }
     return result;
   }
-  
+  /*
+   * 
+   */
   public void clear() {
     ListItem<T> now = head;
     while (now.getNext() != null) {
@@ -103,17 +133,24 @@ class Air<T> implements Queue<T>
     }
     size = 0;
   }
-  
+  /*
+   * 
+   */
   public boolean isEmpty() {
     if (head == null) {
       return true;
     }
     return false;
   }
-  
+  /*
+   * 
+   */
   public int size() {
     return size;
   }
+  /*
+   * 
+   */
   public Object[] toArray() {
     ListItem[] result = new ListItem[MAX_CAPACITY];
     ListItem<T> now = head;
